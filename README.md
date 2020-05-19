@@ -9,7 +9,11 @@ Supports sphere and capsule collision.
 
 ![Cloth Interacting With Ball](https://github.com/levifussell/SimpleUnityClothSimulator/blob/master/Images/ClothToCapsule.png)
 
-The outcome of this project is not a realtime cloth simulation, but one that is stable with collision, yet still fast. I found Unity's base cloth simulator frustratingly unstable for many-body interactions. A list of working features is below. 
+Supports 1000+ vertex _unpinned_ blouses (if that's what you need in life). I managed to get a realtime albeit stretchy blouse working with timestep=0.005 and substeps=1:
+
+![Cloth Interacting With Ball](https://github.com/levifussell/SimpleUnityClothSimulator/blob/master/Images/ClothBlouse.png)
+
+The outcome of this project is not a realtime cloth simulation, but one that focuses on stable collisions, with no pin requirements, yet is still reasonably quick (e.g. 10-30 FPS). I found Unity's standard cloth simulator frustratingly unstable for many-body collisions. Note that you can still get realtime performance if you greatly reduce the number of substeps; the simulation will be stable for small perturbations only, and the cloth will experience some stretching. A list of working features is below. 
 
 TODO:
 * ~cloth-to-sphere interaction~.
