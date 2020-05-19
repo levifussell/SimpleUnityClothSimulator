@@ -79,8 +79,9 @@ public class CCloth : MonoBehaviour
        if(this.debug)
        {
         //    DrawConstraints();
-           DrawDynamics();
-           DrawCollisionConstraints();
+            if(UnityEditor.EditorApplication.isPlaying)
+                DrawDynamics();
+            DrawCollisionConstraints();
        }
     }
 

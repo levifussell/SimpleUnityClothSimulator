@@ -10,8 +10,11 @@ public class SphereCollisionConstraint : CollisionConstraint
     public float radius;
     public float radiusSqrd { get; private set; }
 
+    // [SerializeField]
+    // private float friction;
+
     [SerializeField]
-    private float friction;
+    public Vector3 offset;
 
     // public SphereCollisionConstraint(Vector3 Position, float Radius)
     // {
@@ -22,44 +25,29 @@ public class SphereCollisionConstraint : CollisionConstraint
 
     public void Start()
     {
-        this.position = this.transform.position;
         this.radiusSqrd = this.radius * this.radius;
     }
 
-    public void Update()
+    public override void UpdatePosition()
     {
-        this.position = this.transform.position;
+        this.position = this.transform.position + this.offset;
     }
 
-    public override void ApplyConstraint(PointMass[] points)
+    public override bool ApplyConstraint(ref Vector3 position)
     {
-        foreach(PointMass p in points)
+        Vector3 diff_x1 = this.position - position;
+        if(diff_x1.sqrMagnitude < this.radiusSqrd)
         {
-            Vector3 diff_x1 = this.position - p.position;
-            if(diff_x1.sqrMagnitude < this.radiusSqrd)
-            {
-                p.position = this.position + -diff_x1.normalized * this.radius;
-
-                // also correct the last_position (if inside) so that we do not get crazy normal velocities.
-                Vector3 diff_x0 = this.position - p.lastPosition;
-                if(diff_x0.sqrMagnitude < this.radiusSqrd)
-                {
-                    p.lastPosition = p.position;
-                    // p.lastStepCollidedScalar = 1.0f;
-                }
-                else
-                {
-                    Vector3 correction = p.lastPosition - p.position;
-                    p.position = p.lastPosition + correction * (1.0f - this.friction);
-                }
-            }
-
+            position = this.position + -diff_x1.normalized * this.radius;
+            return true;
         }
+
+        return false;
     }
 
     public override void Draw(Color color)
     {
-        Gizmos.color = color;
+        base.Draw(color);
         Gizmos.DrawWireSphere(this.position, this.radius);
     }
 }
