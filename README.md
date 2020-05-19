@@ -1,7 +1,7 @@
 ![Cloth Interacting With Ball](https://github.com/levifussell/SimpleUnityClothSimulator/blob/master/Images/ClothToSphere.png)
 
 # Simple Unity Cloth Simulator (SUCS)
-A simple Verlet point-mass cloth simulator. Relatively fast for C#, but not perfect (yet). More stable in terms of collisions than Unity's standard cloth sim. at least.
+A standard Verlet point-mass cloth simulator. Relatively fast for C#, but not perfect (...yet). More stable, in terms of collisions, than Unity's standard cloth simulation.
 
 Based on [Jakobsen 2003](https://web.mat.upc.edu/toni.susin/files/AdvancedCharacterPhysics.pdf).
 
