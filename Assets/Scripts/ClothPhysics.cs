@@ -21,8 +21,6 @@ public class ClothPhysics
     
     private float damping;
 
-    private int constraintSteps;
-
     private List<CollisionConstraint> collisionConstraints { get; }
 
     private int collisionConstraintSteps;
@@ -30,7 +28,7 @@ public class ClothPhysics
     public ClothPhysics(
             Vector3[] WorldVertPositions, int[] MeshTriangles, float Mass, 
             float SpringK, Vector3 Gravity, float Damping, float Timestep, 
-            int ConstraintSteps, List<int> PinnedVertices, 
+            List<int> PinnedVertices, 
             List<CollisionConstraint> CollisionConstraints,
             int CollisionConstraintSteps
             )
@@ -41,7 +39,6 @@ public class ClothPhysics
         this.damping = Damping;
         this.timestep = Timestep;
         this.timestepSqrd = this.timestep * this.timestep;
-        this.constraintSteps = ConstraintSteps;
         this.collisionConstraints = CollisionConstraints;
         this.collisionConstraintSteps = CollisionConstraintSteps;
 
@@ -75,7 +72,9 @@ public class ClothPhysics
                 int tA = meshTriangles[i+j];
                 int tB = meshTriangles[i+k];
                 float length = (points[tA].position - points[tB].position).magnitude;
-                SpringConstraint sAB = new SpringConstraint(points[tA], points[tB], length, springK);
+                // SpringConstraint sAB = new SpringConstraint(points[tA], points[tB], length, springK);
+                // shaves off about 6-8ms.
+                SpringConstraintSqrtApprox sAB = new SpringConstraintSqrtApprox(points[tA], points[tB], length, springK);
                 contraints.Add(sAB);
             }
         }
@@ -137,9 +136,6 @@ public class ClothPhysics
             this.ApplyCollisionConstraints();
             this.ApplyConstraints(); // every collision should be followed by a constraint satisfaction.
         }
-
-        for(int i = 0; i < constraintSteps; ++i)
-            this.ApplyConstraints();
 
         this.ApplySelfCollisions();
     }
