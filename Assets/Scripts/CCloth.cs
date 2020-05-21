@@ -32,6 +32,9 @@ public class CCloth : MonoBehaviour
     private List<CollisionConstraint> collisionConstraints;
 
     [SerializeField]
+    private List<SmartStaticCollisionConstraint> ssCollisionConstraints;
+
+    [SerializeField]
     private int collisionConstraintSteps = 1;
 
     [SerializeField]
@@ -50,7 +53,8 @@ public class CCloth : MonoBehaviour
     [SerializeField]
     private bool recordRuntime = true;
 
-    private float avgTime = 0.0f;
+    private float avgTimePhysics = 0.0f;
+    private float avgTimeRender = 0.0f;
 
     void Start()
     {
@@ -65,6 +69,7 @@ public class CCloth : MonoBehaviour
                             Physics.gravity, 1.0f-this.damping, this.timestep/this.substeps, 
                             this.pinnedVertices,
                             this.collisionConstraints,
+                            this.ssCollisionConstraints,
                             this.collisionConstraintSteps
                             );
     }
@@ -76,19 +81,23 @@ public class CCloth : MonoBehaviour
             this.clothPhysics.PhysicsStep();
         st.Stop();
 
-        avgTime = avgTime * 0.9f + st.ElapsedMilliseconds*0.1f;
+        avgTimePhysics = avgTimePhysics * 0.9f + st.ElapsedMilliseconds*0.1f;
     }
 
     void Update()
     {
+        Stopwatch st = Stopwatch.StartNew();
         PointMass[] points = this.clothPhysics.points;
         Vector3[] pVerts = new Vector3[points.Length];
         for(int i = 0; i < pVerts.Length; ++i) // TODO: this copying could be avoided with pntrs.
             pVerts[i] = points[i].position;
-       this.clothRender.UpdateVerticesFromPhysics(pVerts);
+        this.clothRender.UpdateVerticesFromPhysics(pVerts);
+        st.Stop();
+
+        avgTimeRender = avgTimeRender * 0.9f + st.ElapsedMilliseconds*0.1f;
        
         if(this.recordRuntime)
-            UnityEngine.Debug.Log(string.Format("average time: {0}", avgTime));
+            UnityEngine.Debug.Log(string.Format("physics: {0}ms; Render: {1}ms", avgTimePhysics, avgTimeRender));
     }
     
     void OnDrawGizmos()
@@ -102,7 +111,10 @@ public class CCloth : MonoBehaviour
         }
 
         if(this.drawCollisionConstraints)
+        {
             DrawCollisionConstraints();
+            DrawSSCollisionConstraints();
+        }
     }
 
     void DrawConstraints()
@@ -127,6 +139,14 @@ public class CCloth : MonoBehaviour
         foreach(CollisionConstraint c in this.collisionConstraints)
         {
             c.Draw(Color.green);
+        }
+    }
+
+    void DrawSSCollisionConstraints()
+    {
+        foreach(SmartStaticCollisionConstraint c in this.ssCollisionConstraints)
+        {
+            c.Draw(Color.yellow, Color.cyan);
         }
     }
 }

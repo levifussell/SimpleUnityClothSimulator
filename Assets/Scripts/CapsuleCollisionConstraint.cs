@@ -11,9 +11,6 @@ public class CapsuleCollisionConstraint : CollisionConstraint
     private float radius = 0.5f;
     private float radiusSqrd;
 
-    // [SerializeField]
-    // private float friction = 1.0f;
-
     // a capsule contains two sphere colliders.
     private SphereCollisionConstraint[] sphereConstraints;
 
@@ -72,8 +69,6 @@ public class CapsuleCollisionConstraint : CollisionConstraint
             {
                 position = proj_c + -diff.normalized * this.radius;
                 return true;
-                // Vector3 correction = p.lastPosition - p.position;
-                // p.position = p.lastPosition + correction * (1.0f - this.friction);
             }
         }
 

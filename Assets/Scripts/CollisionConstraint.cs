@@ -7,11 +7,10 @@ public abstract class CollisionConstraint : MonoBehaviour
 {
     [SerializeField]
     private float friction = 1.0f;
-    // public CollisionConstraint() {}
     public abstract bool ApplyConstraint(ref Vector3 position);
-    // public abstract void ApplyConstraint(PointMass[] points);
-    public void ApplyConstraint(PointMass[] points)
+    public void ApplyConstraint(IEnumerable<PointMass> points)
     {
+        UnityEngine.Profiling.Profiler.BeginSample("1 COLLISION");
         foreach(PointMass p in points)
         {
             Vector3 pPos = p.position;
@@ -27,6 +26,7 @@ public abstract class CollisionConstraint : MonoBehaviour
                 }
             }
         }
+        UnityEngine.Profiling.Profiler.EndSample();
     }
 
     public virtual void Update()

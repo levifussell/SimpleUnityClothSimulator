@@ -225,6 +225,8 @@ GameObject:
   - component: {fileID: 180341107}
   - component: {fileID: 180341106}
   - component: {fileID: 180341105}
+  - component: {fileID: 180341109}
+  - component: {fileID: 180341110}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -308,6 +310,37 @@ Transform:
   m_Father: {fileID: 601605152}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &180341109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180341104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15de31c2c6082992dbd5332f0825d03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionConstraint: {fileID: 180341105}
+  processCollisionContraint: {fileID: 180341110}
+  updateRateInSteps: -1
+  initSettleUpdateSteps: 100
+--- !u!114 &180341110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180341104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0daa771593d2b1abbaf5dce24272b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 1
+  height: 0.7
+  radius: 0.2
 --- !u!1 &371264613
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,6 +353,8 @@ GameObject:
   - component: {fileID: 371264616}
   - component: {fileID: 371264615}
   - component: {fileID: 371264614}
+  - component: {fileID: 371264618}
+  - component: {fileID: 371264619}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -403,6 +438,37 @@ Transform:
   m_Father: {fileID: 601605152}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &371264618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371264613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15de31c2c6082992dbd5332f0825d03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionConstraint: {fileID: 371264614}
+  processCollisionContraint: {fileID: 371264619}
+  updateRateInSteps: -1
+  initSettleUpdateSteps: 100
+--- !u!114 &371264619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371264613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123ad7792698bab25813488b8d1fc7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 1
+  radius: 0.25
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &601605151
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +516,8 @@ GameObject:
   - component: {fileID: 638452546}
   - component: {fileID: 638452545}
   - component: {fileID: 638452544}
+  - component: {fileID: 638452548}
+  - component: {fileID: 638452549}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -533,6 +601,37 @@ Transform:
   m_Father: {fileID: 601605152}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &638452548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638452543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15de31c2c6082992dbd5332f0825d03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionConstraint: {fileID: 638452544}
+  processCollisionContraint: {fileID: 638452549}
+  updateRateInSteps: -1
+  initSettleUpdateSteps: 100
+--- !u!114 &638452549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638452543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0daa771593d2b1abbaf5dce24272b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 1
+  height: 0.7
+  radius: 0.2
 --- !u!1 &771163005
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +644,8 @@ GameObject:
   - component: {fileID: 771163008}
   - component: {fileID: 771163007}
   - component: {fileID: 771163006}
+  - component: {fileID: 771163010}
+  - component: {fileID: 771163011}
   m_Layer: 0
   m_Name: Capsule (2)
   m_TagString: Untagged
@@ -628,6 +729,37 @@ Transform:
   m_Father: {fileID: 601605152}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -2.6290002, z: 90.00001}
+--- !u!114 &771163010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771163005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15de31c2c6082992dbd5332f0825d03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionConstraint: {fileID: 771163006}
+  processCollisionContraint: {fileID: 771163011}
+  updateRateInSteps: -1
+  initSettleUpdateSteps: 100
+--- !u!114 &771163011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771163005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0daa771593d2b1abbaf5dce24272b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 1
+  height: 0.7
+  radius: 0.2
 --- !u!1001 &1340393811
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -649,7 +781,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.64
+      value: 9.734
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
@@ -699,17 +831,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.7
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: 549a925d6b460e3dda9798cba8e8cc04,
         type: 3}
@@ -720,6 +852,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: blouse1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 549a925d6b460e3dda9798cba8e8cc04,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 549a925d6b460e3dda9798cba8e8cc04, type: 3}
@@ -743,19 +880,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: 0.1
   springK: 1
-  damping: 0.01
+  damping: 0.05
   timestep: 0.004
   pinnedVertices: 
-  collisionConstraints:
-  - {fileID: 638452544}
-  - {fileID: 180341105}
-  - {fileID: 771163006}
-  - {fileID: 371264614}
-  - {fileID: 1488725036}
+  collisionConstraints: []
+  ssCollisionConstraints:
+  - {fileID: 638452548}
+  - {fileID: 371264618}
+  - {fileID: 180341109}
+  - {fileID: 771163010}
+  - {fileID: 1488725040}
   collisionConstraintSteps: 1
-  substeps: 2
-  drawConstraints: 1
-  drawDynamics: 1
+  substeps: 4
+  drawConstraints: 0
+  drawDynamics: 0
   drawCollisionConstraints: 1
   recordRuntime: 1
 --- !u!1 &1488725035
@@ -770,6 +908,8 @@ GameObject:
   - component: {fileID: 1488725038}
   - component: {fileID: 1488725037}
   - component: {fileID: 1488725036}
+  - component: {fileID: 1488725040}
+  - component: {fileID: 1488725041}
   m_Layer: 0
   m_Name: Capsule (3)
   m_TagString: Untagged
@@ -853,6 +993,37 @@ Transform:
   m_Father: {fileID: 601605152}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &1488725040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488725035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15de31c2c6082992dbd5332f0825d03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionConstraint: {fileID: 1488725036}
+  processCollisionContraint: {fileID: 1488725041}
+  updateRateInSteps: -1
+  initSettleUpdateSteps: 100
+--- !u!114 &1488725041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488725035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f0daa771593d2b1abbaf5dce24272b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  friction: 1
+  height: 0.7
+  radius: 0.35
 --- !u!1 &1875545429
 GameObject:
   m_ObjectHideFlags: 0

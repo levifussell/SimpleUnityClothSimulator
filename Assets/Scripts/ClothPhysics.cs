@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Diagnostics;
 
 public class ClothPhysics
 {
@@ -22,14 +23,22 @@ public class ClothPhysics
     private float damping;
 
     private List<CollisionConstraint> collisionConstraints { get; }
+    private List<SmartStaticCollisionConstraint> ssCollisionConstraints { get; }
 
     private int collisionConstraintSteps;
+
+    Timer.FunctionToTime f1;
+    Timer.FunctionToTime f2;
+    Timer.FunctionToTime f3;
+    Timer.FunctionToTime f4;
+    Timer.FunctionToTime f5;
 
     public ClothPhysics(
             Vector3[] WorldVertPositions, int[] MeshTriangles, float Mass, 
             float SpringK, Vector3 Gravity, float Damping, float Timestep, 
             List<int> PinnedVertices, 
             List<CollisionConstraint> CollisionConstraints,
+            List<SmartStaticCollisionConstraint> SSCollisionConstraints,
             int CollisionConstraintSteps
             )
     {
@@ -40,16 +49,24 @@ public class ClothPhysics
         this.timestep = Timestep;
         this.timestepSqrd = this.timestep * this.timestep;
         this.collisionConstraints = CollisionConstraints;
+        this.ssCollisionConstraints = SSCollisionConstraints;
         this.collisionConstraintSteps = CollisionConstraintSteps;
 
         this.ExtractPointsAndEdgesFromMesh(WorldVertPositions, MeshTriangles, PinnedVertices);
+
+        // convert to delegates for timing.
+        f1 = this.ResetPointForces;
+        f2 = this.ApplyGravity;
+        f3 = this.VerletIntegration;
+        f4 = this.ApplyCollisionConstraints;
+        f5 = this.ApplyConstraints;
     }
 
     private void ExtractPointsAndEdgesFromMesh(Vector3[] worldVertPositions, int[] meshTriangles, List<int> pinnedVertices=null)
     {
         if(worldVertPositions == null || meshTriangles == null)
         {
-            Debug.LogError("Null mesh data passed.");
+            UnityEngine.Debug.LogError("Null mesh data passed.");
             return;
         }
 
@@ -125,19 +142,52 @@ public class ClothPhysics
             c.ApplyConstraint(this.points);
     }
 
+    private void ApplySSCollisionConstraints()
+    {
+        foreach(SmartStaticCollisionConstraint c in this.ssCollisionConstraints)
+            c.ApplyConstraintToProcessedPoints(this.points);
+    }
+
+
     public void PhysicsStep()
     {
-        this.ResetPointForces(); 
+        this.ResetPointForces();
         this.ApplyGravity();
         this.VerletIntegration();
 
         for(int i = 0; i < collisionConstraintSteps; ++i)
         {
+            UnityEngine.Profiling.Profiler.BeginSample("COLLISIONS");
             this.ApplyCollisionConstraints();
+            UnityEngine.Profiling.Profiler.EndSample();
+            UnityEngine.Profiling.Profiler.BeginSample("SSCOLLISIONS");
+            this.ApplySSCollisionConstraints();
+            UnityEngine.Profiling.Profiler.EndSample();
+            UnityEngine.Profiling.Profiler.BeginSample("CONSTRAINTS");
             this.ApplyConstraints(); // every collision should be followed by a constraint satisfaction.
+            UnityEngine.Profiling.Profiler.EndSample();
         }
 
         this.ApplySelfCollisions();
+        // TimedPhysicsStep();
+    }
+    public void TimedPhysicsStep()
+    {
+        Stopwatch sw = Stopwatch.StartNew();
+        Timer.TimeThis(f1, "reset");
+        Timer.TimeThis(f2, "gravity");
+        Timer.TimeThis(f3, "verlet");
+
+        for(int i = 0; i < collisionConstraintSteps; ++i)
+        {
+            Timer.TimeThis(f4, "collisions");
+            Timer.TimeThis(f5, "springs");
+        }
+
+        this.ApplySelfCollisions();
+
+        sw.Stop();
+        UnityEngine.Debug.Log("PHYS TIME: " + sw.ElapsedMilliseconds + "ms");
     }
 }
 

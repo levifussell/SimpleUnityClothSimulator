@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class SphereCollisionConstraint : CollisionConstraint
 {
-    // [SerializeField]
     public Vector3 position {get; set;}
     [SerializeField]
     public float radius;
     public float radiusSqrd { get; private set; }
-
-    // [SerializeField]
-    // private float friction;
 
     [SerializeField]
     public Vector3 offset;

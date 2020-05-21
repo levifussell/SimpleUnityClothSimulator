@@ -47,10 +47,8 @@ public class SpringConstraint : Constraint
         float lOffset = length - d;
         Vector3 correctionA = lOffset * dVn;
         Vector3 correctionB = lOffset * -dVn;
-        // float forceScalar = (this.pA.invMass == 0.0 || this.pB.invMass == 0.0 || this.pA.lastStepCollidedScalar == 1.0f || this.pB.lastStepCollidedScalar == 1.0f) ? 1.0f : 0.5f;
-        // this.pA.position += this.k*correctionA * forceScalar * this.pA.pinConstraintScalar * (1.0f - this.pA.lastStepCollidedScalar);
-        // this.pB.position += this.k*correctionB * forceScalar * this.pB.pinConstraintScalar * (1.0f - this.pB.lastStepCollidedScalar);
         float forceScalar = (this.pA.invMass == 0.0 || this.pB.invMass == 0.0 || this.pA.lastStepCollidedScalar == 1.0f || this.pB.lastStepCollidedScalar == 1.0f) ? 1.0f : 0.5f;
+        // float forceScalar = 0.5f;
         this.pA.position += this.k*correctionA * forceScalar * this.pA.pinConstraintScalar;
         this.pB.position += this.k*correctionB * forceScalar * this.pB.pinConstraintScalar;
     }
